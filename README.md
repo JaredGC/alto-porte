@@ -1,0 +1,98 @@
+En este README.md encontrarán toda la documentación del proyecto, desde la idea inicial hasta el despliegue.
+--No habrá ningún de texto generado por IA en este archivo--
+
+
+Parece ser que Alto Porte quiere que realice un pequeño CRM como prueba técnica, debo ingeniármelas para no rehacer exactamente el mismo CRM que hice para Acres Inmobiliaria.
+
+Me pidieron que trabaje con Angular + Express + MongoDB, pero mi stack actual es Next + Nest + PostgreSQL.
+
+Ellos no se lo esperan, pero voy a entregarles el CRM hecho en ambos stack, la idea es presentar mi stack principal como la muestra de mis habilidades como desarrollador, y presentar el otro stack como la muestra de mis habilidades de aprendizaje.
+
+La idea de mover los leads por cilindros que representan los estados es de las mejores ideas que he visto, pero debe haber alguna otra idea...
+Estuve buscando otra manera de manejar los leads, pero no encontré ninguna mejor que la de los cilindros, me quedaré con esa idea.
+
+
+
+Los requerimientos ya están detallados en el documento,
+por lo que voy a comenzar por planificar la estructura de la base de datos, sus tablas y relaciones:
+
+			--DB ENTITIES (cada uno tendrá su created_at y updated_at)---
+
+-Core:
+	-roles: 
+		-ID					PRIMARY KEY, INTEGER, NOT NULL
+		-name:						     VARCHAR, NOT NULL
+			-Super admin
+			-Admin
+			-Agente 
+		-slug						     VARCHAR, NOT NULL
+			0-super_admin
+			1-admin
+			2-agent
+	
+	-users:
+		-ID					PRIMARY KEY, INTEGER, NOT NULL
+		-name						     VARCHAR, NOT NULL
+		-email						     VARCHAR, NOT NULL
+		-password					     TEXT,    NOT NULL
+		-access_token					     TEXT,    NOT NULL
+		-role_id				FOREIGN KEY, INTEGER, NOT NULL
+	
+-Deals:
+	-leads:
+		-ID					PRIMARY KEY, INTEGER, NOT NULL
+		-name						     VARCHAR, NOT NULL
+		-email						     VARCHAR, NULLABLE
+		-phone						     VARCHAR, NOT NULL
+		-source						     VARCHAR, NOT NULL
+		-status:					     INTEGER, NOT NULL
+			1-Nuevo
+			2-Contactado
+			3-Calificado
+			4-Reservado
+			5-Descartado
+		-budget						     FLOAT,   NOT NULL
+		-project					     VARCHAR, NOT NULL
+		-agent_id				FOREIGN KEY, INTEGER, NOT NULL
+
+-Dashboard:
+	-dashboard (más adelante explicaré por qué esta tabla es importante):
+		-ID					PRIMARY KEY, INTEGER, NOT NULL
+		-json						     TEXT,    NOT NULL
+		-syncronized					     BOOLEAN, NOT NULL
+
+
+Creo que esa estructura bastará.
+
+
+Ahora, para el backend en Nest, voy a utilizar mi estructura favorita (hecha a mano):
+
+nest-backend:
+	/src
+	   /Config
+		-cors-origins.ts
+	   /Tests
+	   /Modules
+		/Core | estructura de módulos:
+		    /Controllers
+		    /Servicies
+		    /Entities
+		    /Modules
+		    /Guard
+			-token.guard.ts
+			-token-guard.decorator.ts
+		/User
+		/Deals
+		/Dashboard
+	   -app.controller.ts
+	   -app.module.ts
+	   -app.service.ts
+	   -main.ts
+	-.env
+	-.env.example
+
+
+Normalmente solo copiaría y pegaría todo esto escrito a Claude Code, pero llevo tanto tiempo de no escribir código a mano que prefiero hacerlo yo mismo
+
+Comencé creando un nuevo repositorio llamado technical-test-alto-porte con git init
+Dentro del repositorio creé las carpetas y archivos tal como lo indicaba el documento.
