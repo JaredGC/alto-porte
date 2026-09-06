@@ -96,3 +96,6 @@ Normalmente solo copiaría y pegaría todo esto escrito a Claude Code, pero llev
 
 Comencé creando un nuevo repositorio llamado technical-test-alto-porte con git init
 Dentro del repositorio creé las carpetas y archivos tal como lo indicaba el documento.
+
+
+He comenzado por crear el backend, voy a utilizar el patrón de diseño MVC que aprendí en laravel
