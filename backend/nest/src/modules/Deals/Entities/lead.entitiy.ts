@@ -16,7 +16,7 @@ export class Lead extends BaseEntity {
     @Column({ type: 'varchar', length: 25, nullable: false })
     source: string;
 
-    @Column({ type: 'integer', nullable: false })
+    @Column({ type: 'integer', nullable: false, default: 1 })
     status: number; // 1: Nuevo, 2: Contactado, 3: Calificado, 4: Reservado, 5: Descartado
 
     @Column({ type: 'float', nullable: false })

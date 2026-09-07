@@ -1,0 +1,121 @@
+export const leadStatuses = {
+  Nuevo: 1,
+  Contactado: 2,
+  Calificado: 3,
+  Reservado: 4,
+  Descartado: 5,
+} as const;
+
+interface SeedLead {
+  name: string;
+  email: string;
+  phone: string;
+  source: string;
+  status: keyof typeof leadStatuses;
+  budget: number;
+  project: string;
+  createdAt: string;
+}
+
+export const leadsData: SeedLead[] = [
+  {
+    name: 'Carlos Mendoza',
+    email: 'carlos@example.com',
+    phone: '7000-1001',
+    source: 'Facebook',
+    status: 'Nuevo',
+    budget: 145000,
+    project: 'Residencial Altavista',
+    createdAt: '2026-08-01',
+  },
+  {
+    name: 'María López',
+    email: 'maria@example.com',
+    phone: '7000-1002',
+    source: 'Instagram',
+    status: 'Contactado',
+    budget: 175000,
+    project: 'Residencial Altavista',
+    createdAt: '2026-08-03',
+  },
+  {
+    name: 'José Hernández',
+    email: 'jose@example.com',
+    phone: '7000-1003',
+    source: 'Website',
+    status: 'Calificado',
+    budget: 210000,
+    project: 'Torres del Valle',
+    createdAt: '2026-08-05',
+  },
+  {
+    name: 'Andrea Martínez',
+    email: 'andrea@example.com',
+    phone: '7000-1004',
+    source: 'Facebook',
+    status: 'Reservado',
+    budget: 185000,
+    project: 'Torres del Valle',
+    createdAt: '2026-08-07',
+  },
+  {
+    name: 'Luis Ramírez',
+    email: 'luis@example.com',
+    phone: '7000-1005',
+    source: 'Referido',
+    status: 'Nuevo',
+    budget: 130000,
+    project: 'Residencial Altavista',
+    createdAt: '2026-08-10',
+  },
+  {
+    name: 'Sofía Castillo',
+    email: 'sofia@example.com',
+    phone: '7000-1006',
+    source: 'Instagram',
+    status: 'Descartado',
+    budget: 115000,
+    project: 'Vista Verde',
+    createdAt: '2026-08-12',
+  },
+  {
+    name: 'Roberto Flores',
+    email: 'roberto@example.com',
+    phone: '7000-1007',
+    source: 'Website',
+    status: 'Calificado',
+    budget: 195000,
+    project: 'Vista Verde',
+    createdAt: '2026-08-15',
+  },
+  {
+    name: 'Daniela Cruz',
+    email: 'daniela@example.com',
+    phone: '7000-1008',
+    source: 'Facebook',
+    status: 'Reservado',
+    budget: 220000,
+    project: 'Torres del Valle',
+    createdAt: '2026-08-18',
+  },
+  {
+    name: 'Fernando Reyes',
+    email: 'fernando@example.com',
+    phone: '7000-1009',
+    source: 'Referido',
+    status: 'Contactado',
+    budget: 160000,
+    project: 'Residencial Altavista',
+    createdAt: '2026-08-20',
+  },
+  {
+    name: 'Gabriela Pérez',
+    email: 'gabriela@example.com',
+    phone: '7000-1010',
+    source: 'Instagram',
+    status: 'Calificado',
+    budget: 205000,
+    project: 'Vista Verde',
+    createdAt: '2026-08-22',
+  },
+];
