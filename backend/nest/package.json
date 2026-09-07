@@ -63,10 +63,27 @@
       "ts"
     ],
     "rootDir": "src",
+    "moduleNameMapper": {
+      "^@(Core|User|Deals|Dashboard)/(.*)$": "<rootDir>/modules/$1/$2"
+    },
     "testRegex": ".*\\.spec\\.ts$",
     "transform": {
-      "^.+\\.(t|j)s$": "ts-jest"
+      "^.+\\.js$": "<rootDir>/../test/esm-compat.transformer.cjs",
+      "^.+\\.ts$": [
+        "ts-jest",
+        {
+          "tsconfig": {
+            "module": "CommonJS",
+            "moduleResolution": "Node",
+            "resolvePackageJsonExports": false,
+            "allowJs": true
+          }
+        }
+      ]
     },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\](?!@nestjs[/\\\\](?:typeorm|config)[/\\\\])"
+    ],
     "collectCoverageFrom": [
       "**/*.(t|j)s"
     ],

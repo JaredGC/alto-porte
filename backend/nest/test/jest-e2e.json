@@ -1,9 +1,26 @@
 {
   "moduleFileExtensions": ["js", "json", "ts"],
   "rootDir": ".",
+  "moduleNameMapper": {
+    "^@(Core|User|Deals|Dashboard)/(.*)$": "<rootDir>/../src/modules/$1/$2"
+  },
   "testEnvironment": "node",
   "testRegex": ".e2e-spec.ts$",
   "transform": {
-    "^.+\\.(t|j)s$": "ts-jest"
-  }
+    "^.+\\.js$": "<rootDir>/esm-compat.transformer.cjs",
+    "^.+\\.ts$": [
+      "ts-jest",
+      {
+        "tsconfig": {
+          "module": "CommonJS",
+          "moduleResolution": "Node",
+          "resolvePackageJsonExports": false,
+          "allowJs": true
+        }
+      }
+    ]
+  },
+  "transformIgnorePatterns": [
+    "[/\\\\]node_modules[/\\\\](?!@nestjs[/\\\\](?:typeorm|config)[/\\\\])"
+  ]
 }
