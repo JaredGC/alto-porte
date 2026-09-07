@@ -7,6 +7,7 @@ import { DashboardController } from '@Dashboard/Controllers/dashboard.controller
 @Module({
   imports: [EntitiesModule],
   providers: [DashboardService],
+  exports: [DashboardService],
   controllers: [DashboardController],
 })
 export class DashboardModule extends BaseModule {}

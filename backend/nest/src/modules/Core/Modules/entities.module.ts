@@ -1,6 +1,6 @@
 import { Global, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { BaseEntity } from '@Core/Entities/base.entity';
+import { Dashboard } from '@Dashboard/Entities/dashboard.entitiy';
 import { User } from '@User/Entities/user.entitiy';
 import { Role } from '@User/Entities/role.entity';
 import { Lead } from '@Deals/Entities/lead.entitiy';
@@ -9,7 +9,7 @@ import { Lead } from '@Deals/Entities/lead.entitiy';
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      BaseEntity,
+      Dashboard,
       User,
       Role,
       Lead

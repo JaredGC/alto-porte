@@ -3,9 +3,10 @@ import { EntitiesModule } from '@Core/Modules/entities.module';
 import { Module } from '@nestjs/common';
 import { LeadsService } from '@Deals/Services/leads.service';
 import { LeadsController } from '@Deals/Controllers/leads.controller';
+import { DashboardModule } from '@Dashboard/Modules/dashboard.module';
 
 @Module({
-  imports: [EntitiesModule],
+  imports: [EntitiesModule, DashboardModule],
   providers: [LeadsService],
   controllers: [LeadsController],
 })
