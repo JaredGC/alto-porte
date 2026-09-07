@@ -1,11 +1,15 @@
 import { TokenGuard } from '@Core/Guard/token-guard.decorator';
 import type { CreateLeadDto, UpdateLeadDto } from '@Deals/Interfaces/deals.interface';
 import { LeadsService } from '@Deals/Services/leads.service';
+import { DashboardService } from '@Dashboard/Services/dashboard.service';
 import { Controller, Get, Param, Post, Query, Body, Patch, Delete } from '@nestjs/common';
 
 @Controller('leads')
 export class LeadsController {
-    constructor (private leadsService: LeadsService) {}
+    constructor (
+        private leadsService: LeadsService,
+        private dashboardService: DashboardService,
+    ) {}
 
     @Get('/:status')
     @TokenGuard()
@@ -28,7 +32,7 @@ export class LeadsController {
 
     @Post('/')
     @TokenGuard()
-    createLead(
+    async createLead(
         @Body() {
             name,
             email,
@@ -38,21 +42,24 @@ export class LeadsController {
             project
         }: CreateLeadDto,
     ) {
+        await this.dashboardService.unableDashboard();
         return this.leadsService.createLead({ name, email, phone, source, budget, project });
     }
 
     @Patch('/:id')
     @TokenGuard()
-    updateLead(
+    async updateLead(
         @Param('id') id: number,
         @Body() updateLeadDto: UpdateLeadDto,
     ) {
+        await this.dashboardService.unableDashboard();
         return this.leadsService.updateLead(id, updateLeadDto);
     }
     
     @Delete('/:id')
     @TokenGuard(['super_admin'])
-    deleteLead(@Param('id') id: number) {
+    async deleteLead(@Param('id') id: number) {
+        await this.dashboardService.unableDashboard();
         return this.leadsService.deleteLead(id);
     }
 }
