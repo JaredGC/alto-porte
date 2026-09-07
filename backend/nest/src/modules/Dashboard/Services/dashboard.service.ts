@@ -13,13 +13,13 @@ export class DashboardService {
   ) {}
 
   async getSummary() {
-    const isDashboard = await this.dashboardRepo.find({
+    const isDashboard = await this.dashboardRepo.findOne({
       where: {
         syncronized: true,
       },
     });
 
-    if (isDashboard) return isDashboard[0].json;
+    if (isDashboard) return isDashboard.json;
 
     const newDashboardJson = await this.makeDashboard();
 
@@ -32,14 +32,14 @@ export class DashboardService {
   }
 
   async unableDashboard() {
-    const dashboard = await this.dashboardRepo.find({
+    const dashboard = await this.dashboardRepo.findOne({
       where: {
         syncronized: true,
       },
     });
-    if (dashboard.length > 0) {
-      dashboard[0].syncronized = false;
-      await this.dashboardRepo.save(dashboard[0]);
+    if (dashboard) {
+      dashboard.syncronized = false;
+      await this.dashboardRepo.save(dashboard);
     }
   }
 
