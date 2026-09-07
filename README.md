@@ -99,3 +99,6 @@ Dentro del repositorio creé las carpetas y archivos tal como lo indicaba el doc
 
 
 He comenzado por crear el backend, voy a utilizar el patrón de diseño MVC que aprendí en laravel
+
+
+He terminado el backend en nest, pero me he dado cuenta que en el documento decía que los datos para el dashboard no deberían ser calculados en memoria, si no desde MongoDB, eso era algo que no tomé en cuenta, pues mi idea principal era cargarlos solo una vez y almacenar el json hasta que algún dato cambiara, porque sé que un dashboard puede ser pesado. voy a realizarlo de esa manera en el backend en Express
