@@ -8,6 +8,8 @@ Me pidieron que trabaje con Angular + Express + MongoDB, pero mi stack actual es
 
 Ellos no se lo esperan, pero voy a entregarles el CRM hecho en ambos stack, la idea es presentar mi stack principal como la muestra de mis habilidades como desarrollador, y presentar el otro stack como la muestra de mis habilidades de aprendizaje.
 
+(edit) pues al haber hecho casi todo a mano, parece que ya no me ha dado el tiempo para hacer eso, son las 1am y recién he terminado el backend y la base del frontend, voy a suspender esa idea.
+
 La idea de mover los leads por cilindros que representan los estados es de las mejores ideas que he visto, pero debe haber alguna otra idea...
 Estuve buscando otra manera de manejar los leads, pero no encontré ninguna mejor que la de los cilindros, me quedaré con esa idea.
 
@@ -91,14 +93,34 @@ nest-backend:
 	-.env
 	-.env.example
 
+Para el frontend, dado que usaré NextJs, el enrutamiento ya está definido, por lo que usaré esta estructura:
+
+next-frontend:
+	/app
+		/(logged out)
+			/login
+				-actions.ts
+				-loginForm.tsx
+				-page.tsx
+		/lib
+			-api.ts
+			-server-api.ts
+			-session.ts
+		-layout.tsx
+		-page.tsx
+		/tratos
+			-page.tsx
+			-layout.tsx
+		/dashboard
+			-page.tsx
+			-layout.tsx
+
 
 Normalmente solo copiaría y pegaría todo esto escrito a Claude Code, pero llevo tanto tiempo de no escribir código a mano que prefiero hacerlo yo mismo
-
 Comencé creando un nuevo repositorio llamado technical-test-alto-porte con git init
 Dentro del repositorio creé las carpetas y archivos tal como lo indicaba el documento.
 
 
 He comenzado por crear el backend, voy a utilizar el patrón de diseño MVC que aprendí en laravel
-
 
 He terminado el backend en nest, pero me he dado cuenta que en el documento decía que los datos para el dashboard no deberían ser calculados en memoria, si no desde MongoDB, eso era algo que no tomé en cuenta, pues mi idea principal era cargarlos solo una vez y almacenar el json hasta que algún dato cambiara, porque sé que un dashboard puede ser pesado. voy a realizarlo de esa manera en el backend en Express
