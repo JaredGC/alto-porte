@@ -23,6 +23,9 @@
       ],
       "@Deals/*": [
         "Deals/*"
+      ],
+      "@Dashboard/*": [
+        "Dashboard/*"
       ]
     },
     "incremental": true,
