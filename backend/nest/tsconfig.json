@@ -20,6 +20,9 @@
       ],
       "@User/*": [
         "User/*"
+      ],
+      "@Deals/*": [
+        "Deals/*"
       ]
     },
     "incremental": true,

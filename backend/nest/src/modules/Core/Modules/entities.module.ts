@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { BaseEntity } from '@Core/Entities/base.entity';
 import { User } from '@User/Entities/user.entitiy';
 import { Role } from '@User/Entities/role.entity';
+import { Lead } from '@Deals/Entities/lead.entitiy';
 
 @Global()
 @Module({
@@ -11,6 +12,7 @@ import { Role } from '@User/Entities/role.entity';
       BaseEntity,
       User,
       Role,
+      Lead
     ]),
   ],
   exports: [TypeOrmModule],
