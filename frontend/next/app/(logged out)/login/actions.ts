@@ -11,12 +11,12 @@ const loginSchema = Yup.object().shape({
 });
 
 export async function login(_prevState: any, formData: FormData) {
-
+  const apiPath = process.env.NEXT_PUBLIC_API;
   try {
     const result = await loginSchema.validate(Object.fromEntries(formData));
     const { email, password } = result;
-  
-    const response = await fetch("http://localhost:3001/auth/login", {
+      
+    const response = await fetch(`${apiPath}/auth/login`, {
       method: "POST",
       body: JSON.stringify({ email, password }),
       headers: {
