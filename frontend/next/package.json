@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
     "@heroui/tooltip": "^2.2.29",
     "jose": "^6.2.12",
     "lucide-react": "^1.43.0",

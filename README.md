@@ -126,3 +126,9 @@ He comenzado por crear el backend, voy a utilizar el patrón de diseño MVC que 
 He terminado el backend en nest, pero me he dado cuenta que en el documento decía que los datos para el dashboard no deberían ser calculados en memoria, si no desde MongoDB, eso era algo que no tomé en cuenta, pues mi idea principal era cargarlos solo una vez y almacenar el json hasta que algún dato cambiara, porque sé que un dashboard puede ser pesado. voy a realizarlo de esa manera en el backend en Express
 
 Quería terminar el frontend hoy, pero apenas he podido terminar una tarea que me dejó la empresa a esta hora
+
+
+Vamos a comenzar la pantalla de tratos utilizando la librería @hello-pangea/dnd que es para manejar una lista draggable.
+El frontend traerá los leads del backend.
+Voy a utilizar la librería @hello-pangea/dnd para hacer los cilindros con items desplazables
+He terminado la tabla de leads, aunque me falta refactorizar el código.

@@ -1,9 +1,9 @@
-"use client";
+import Treats from "./partials/Treats";
 
-export default function Page() {
-
+export default async function Tratos() {
   return (
-    <div className="min-h-screen bg-slate-50">
-    </div>
+    <main className="flex-1 px-4 py-4 text-black bg-white flex flex-col gap-14">
+      <Treats />
+    </main>
   );
 }
