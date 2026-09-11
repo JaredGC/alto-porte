@@ -1,0 +1,9 @@
+import Treats from "./partials/Treats";
+
+export default async function Tratos() {
+  return (
+    <main className="flex-1 px-4 py-4 text-black bg-white flex flex-col gap-14">
+      <Treats />
+    </main>
+  );
+}
