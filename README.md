@@ -131,4 +131,4 @@ Quería terminar el frontend hoy, pero apenas he podido terminar una tarea que m
 Vamos a comenzar la pantalla de tratos utilizando la librería @hello-pangea/dnd que es para manejar una lista draggable.
 El frontend traerá los leads del backend.
 Voy a utilizar la librería @hello-pangea/dnd para hacer los cilindros con items desplazables
-He terminado la tabla de leads, aunque me falta refactorizar el código.
+He terminado la tabla de leads, aunque me falta refactorizar el código, continuaré mañana.
