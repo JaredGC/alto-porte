@@ -132,3 +132,6 @@ Vamos a comenzar la pantalla de tratos utilizando la librería @hello-pangea/dnd
 El frontend traerá los leads del backend.
 Voy a utilizar la librería @hello-pangea/dnd para hacer los cilindros con items desplazables
 He terminado la tabla de leads, aunque me falta refactorizar el código, continuaré mañana.
+
+He refactorizado la tabla de leads, pues habían muchas cosas repetidas, este README también será refactorizado al finalizar le proyecto.
+Voy a comenzar por hacer la actualización de los leads por estados
