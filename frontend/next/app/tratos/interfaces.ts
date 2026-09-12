@@ -16,3 +16,13 @@ export type Listas = {
     reservados: Trato[];
     descartados: Trato[];
 }
+
+export type Filtros = {
+    source: { value: string; active: boolean }[];
+    project: { value: string; active: boolean }[];
+};
+
+export type FiltrosResponse = {
+    sources: string[];
+    projects: string[];
+}

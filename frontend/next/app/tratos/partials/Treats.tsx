@@ -9,8 +9,8 @@ import {
 } from '@hello-pangea/dnd';
 import { useEffect, useState } from "react";
 import { getUserData } from "@/app/lib/session";
-import type { Trato, Listas } from "../interfaces";
-import type { ColumnaId, Filtros } from "../constants";
+import type { Trato, Listas, Filtros, FiltrosResponse } from "../interfaces";
+import type { ColumnaId } from "../constants";
 import { columnas, columnaStatusMap, filtroOptions } from "../constants";
 
 const CardRenderer = (card: Trato) => {
@@ -76,7 +76,7 @@ const FiltrosRenderer = ({filtros, setFiltros}: {filtros: Filtros, setFiltros: R
     };
     return (
         <div className="flex gap-8">
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
                 <p>Origen</p>
                 <div className="flex gap-2">
                     {filtros.source.map(option => (
@@ -90,7 +90,7 @@ const FiltrosRenderer = ({filtros, setFiltros}: {filtros: Filtros, setFiltros: R
                     ))}
                 </div>
             </div>
-            <div className="flex flex-col">
+            <div className="flex flex-col gap-2">
                 <p>Proyecto</p>
                 <div className="flex gap-2">
                     {filtros.project.map(option => (
@@ -117,6 +117,22 @@ export default function Treats() {
         descartados: [],
     });
     const [filtros, setFiltros] = useState<Filtros>(filtroOptions);
+
+    const getFiltrosOptions = async () => {
+        const userData = await getUserData();
+
+        const filtrosData: FiltrosResponse = await fetch(`http://localhost:3002/api/leads/filters`, {
+            method: "POST",
+            headers: {
+                "authorization": `Bearer ${userData?.userAccessToken}`
+            }
+        }).then(res => res.json());
+
+        setFiltros({
+            source: filtrosData.sources.map(value => ({ value, active: false })),
+            project: filtrosData.projects.map(value => ({ value, active: false })),
+        });
+    };
 
     const getLeads = async (status: number) => {
         const userData = await getUserData();
@@ -182,6 +198,14 @@ export default function Treats() {
 
         fetchData();
     }, [filtros]);
+
+    useEffect(() => {
+        const fetchFiltros = async () => {
+            await getFiltrosOptions();
+        };
+
+        fetchFiltros();
+    }, []);
 
     const onDragEnd = (result: DropResult) => {
         if (!result.destination) {
