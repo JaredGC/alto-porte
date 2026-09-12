@@ -1,4 +1,5 @@
 import { Filtros } from "./interfaces";
+import * as Yup from 'yup';
 
 export const columnas = [
     { id: "nuevos", nombre: "Nuevos", status: 1 },
@@ -22,3 +23,15 @@ export const filtroOptions = {
     source: [],
     project: []
 } as Filtros;
+
+export const leadValidationSchema = Yup.object({
+    name: Yup.string().required('El nombre es obligatorio'),
+    email: Yup.string().email('Ingresa un correo válido'),
+    phone: Yup.string().required('El teléfono es obligatorio'),
+    source: Yup.string().required('La fuente es obligatoria'),
+    budget: Yup.number()
+        .typeError('El presupuesto debe ser un número')
+        .min(0, 'El presupuesto no puede ser negativo')
+        .required('El presupuesto es obligatorio'),
+    project: Yup.string().required('El proyecto es obligatorio'),
+});

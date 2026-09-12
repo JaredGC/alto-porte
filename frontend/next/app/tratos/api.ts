@@ -1,5 +1,5 @@
 import { getUserData } from "../lib/session";
-import type { Filtros, FiltrosResponse, Trato } from "./interfaces";
+import type { CreateLeadDto, Filtros, FiltrosResponse, Lead } from "./interfaces";
 
 export const getFiltrosOptions = async () => {
     const userData = await getUserData();
@@ -17,7 +17,7 @@ export const getFiltrosOptions = async () => {
 export const getLeads = async (status: number, filtros: Filtros) => {
     const userData = await getUserData();
 
-    const tratos: Trato[] = await fetch(`http://localhost:3002/api/leads/${status}?project=${filtros.project.find(option => option.active)?.value || ''}&source=${filtros.source.find(option => option.active)?.value || ''}`, {
+    const tratos: Lead[] = await fetch(`http://localhost:3002/api/leads/${status}?project=${filtros.project.find(option => option.active)?.value || ''}&source=${filtros.source.find(option => option.active)?.value || ''}`, {
         headers: {
             "authorization": `Bearer ${userData?.userAccessToken}`
         }
@@ -37,4 +37,18 @@ export const updateLead = async (id: string, status: number) => {
         },
         body: JSON.stringify({ status })
     });
+};
+
+export const createLead = async (lead: CreateLeadDto): Promise<Lead> => {
+    const userData = await getUserData();
+
+    const response = await fetch(`http://localhost:3002/api/leads`, {
+        method: "POST",
+        headers: {
+            "authorization": `Bearer ${userData?.userAccessToken}`,
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(lead)
+    });
+    return response.json();
 };

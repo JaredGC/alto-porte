@@ -138,4 +138,13 @@ Voy a comenzar por hacer la actualización de los leads por estados
 
 Ya he terminado la actualización de leads por estados, cuando se arrastra un lead a un cilindro diferente, se actualiza su estado.
 Tambien he añadido un filtro de leads, del origen y proyecto
-Me di cuenta que lo mejor es manejar los filtros en el backend, haciendo un select DISTINCT para que los filtros se actualizen con forme se añadan mas tipos de datos. también refactoricé un poco más el código para que sea mas legíble
+Me di cuenta que lo mejor es manejar los filtros en el backend, haciendo un select DISTINCT para que los filtros se actualizen con forme se añadan mas tipos de datos. también refactoricé un poco más el código para que sea mas legíble.
+
+
+Voy a comenzar a hacer el formulario para añadir un nuevo lead, en el documento me pedían utilizar reactive forms, pero eso es de Angular, como alternativa para React utilizaré formik + yup
+
+Dado que el proyecto es pequeño, no hize una tabla aparte para agregar los proyectos de la empresa, por lo que en el formulario, dejaré el campo "Proyecto" como texto.
+De otra forma, yo hubiera puesto un select que desplegara los proyectos en base a su id y value.
+
+He terminado el formulario del nuevo lead, pero ahora debo hacer que aparezca, porque solo se guarda y ya.
+Bien, ahora el lead guardado ya aparece, todo bien, y de paso refactoricé un poco mas el código. 
