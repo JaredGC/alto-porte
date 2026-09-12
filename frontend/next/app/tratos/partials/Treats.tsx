@@ -10,8 +10,8 @@ import {
 import { useEffect, useState } from "react";
 import { getUserData } from "@/app/lib/session";
 import type { Trato, Listas } from "../interfaces";
-import type { ColumnaId } from "../constants";
-import { columnas, columnaStatusMap } from "../constants";
+import type { ColumnaId, Filtros } from "../constants";
+import { columnas, columnaStatusMap, filtroOptions } from "../constants";
 
 const CardRenderer = (card: Trato) => {
     return (
@@ -52,6 +52,62 @@ const CardRenderer = (card: Trato) => {
     );
 }
 
+const FiltrosRenderer = ({filtros, setFiltros}: {filtros: Filtros, setFiltros: React.Dispatch<React.SetStateAction<Filtros>>}) => {
+    const setFiltro = (type: "source" | "project", value: string) => {
+        setFiltros(prev => {
+            const shouldActivate = !prev[type].find(option => option.value === value)?.active;
+
+            return {
+                ...prev,
+                source: prev.source.map(option => ({
+                    ...option,
+                    active: type === "source"
+                        ? shouldActivate && option.value === value
+                        : option.active,
+                })),
+                project: prev.project.map(option => ({
+                    ...option,
+                    active: type === "project"
+                        ? shouldActivate && option.value === value
+                        : option.active,
+                })),
+            };
+        });
+    };
+    return (
+        <div className="flex gap-8">
+            <div className="flex flex-col">
+                <p>Origen</p>
+                <div className="flex gap-2">
+                    {filtros.source.map(option => (
+                        <button
+                            key={option.value}
+                            onClick={() => setFiltro("source", option.value)}
+                            className={`px-2 py-1 text-xs rounded-full ${option.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        >
+                            {option.value}
+                        </button>
+                    ))}
+                </div>
+            </div>
+            <div className="flex flex-col">
+                <p>Proyecto</p>
+                <div className="flex gap-2">
+                    {filtros.project.map(option => (
+                        <button
+                            key={option.value}
+                            onClick={() => setFiltro("project", option.value)}
+                            className={`px-2 py-1 text-xs rounded-full ${option.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                        >
+                            {option.value}
+                        </button>
+                    ))}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 export default function Treats() {
     const [listas, setListas] = useState<Listas>({
         nuevos: [],
@@ -60,11 +116,12 @@ export default function Treats() {
         reservados: [],
         descartados: [],
     });
+    const [filtros, setFiltros] = useState<Filtros>(filtroOptions);
 
     const getLeads = async (status: number) => {
         const userData = await getUserData();
 
-        const tratos: Trato[] = await fetch(`http://localhost:3002/api/leads/${status}`, {
+        const tratos: Trato[] = await fetch(`http://localhost:3002/api/leads/${status}?project=${filtros.project.find(option => option.active)?.value || ''}&source=${filtros.source.find(option => option.active)?.value || ''}`, {
             headers: {
                 "authorization": `Bearer ${userData?.userAccessToken}`
             }
@@ -75,8 +132,6 @@ export default function Treats() {
 
     const updateLead = async (id: string, status: number) => {
         const userData = await getUserData();
-
-        console.log({id, status});
 
         await fetch(`http://localhost:3002/api/leads/${id}`, {
             method: "PATCH",
@@ -89,7 +144,6 @@ export default function Treats() {
     };
 
     const reorder = (list: Trato[], startIndex: number, endIndex: number): Trato[] => {
-        console.log({startIndex, endIndex});
         const result = Array.from(list);
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
@@ -127,7 +181,7 @@ export default function Treats() {
         };
 
         fetchData();
-    }, []);
+    }, [filtros]);
 
     const onDragEnd = (result: DropResult) => {
         if (!result.destination) {
@@ -174,7 +228,9 @@ export default function Treats() {
     };
 
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
+        <>
+            <FiltrosRenderer filtros={filtros} setFiltros={setFiltros} />
+            <DragDropContext onDragEnd={onDragEnd}>
             <div className="flex gap-2">
                 {columnas.map((columna) => {
                     const cards = listas[columna.id];
@@ -227,6 +283,7 @@ export default function Treats() {
                     );
                 })}
             </div>
-        </DragDropContext>
+            </DragDropContext>
+        </>
     );
 }

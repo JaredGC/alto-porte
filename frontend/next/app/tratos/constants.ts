@@ -15,3 +15,46 @@ export const columnaStatusMap = {
 } as const;
 
 export type ColumnaId = typeof columnas[number]["id"];
+
+export type Filtros = {
+    map(arg0: ([filterType, options]: [keyof Filtros, Filtros[keyof Filtros]]) => (keyof Filtros | { active: boolean; value: string; }[])[]): Filtros;
+    source: {
+        value: string;
+        active: boolean;
+    }[];
+    project: {
+        value: string;
+        active: boolean;
+    }[];
+}
+
+export const filtroOptions = {
+    source: [
+        {
+            value: "Facebook",
+            active: false,
+        },
+        {
+            value: "Instagram",
+            active: false,
+        },
+        {
+            value: "Website",
+            active: false,
+        }
+    ],
+    project: [
+        {
+            value: "Residencial Altavista",
+            active: false,
+        },
+        {
+            value: "Vista Verde",
+            active: false,
+        },
+        {
+            value: "Torres del Valle",
+            active: false,
+        }
+    ]
+} as Filtros;
