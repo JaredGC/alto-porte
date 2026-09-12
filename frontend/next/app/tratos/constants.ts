@@ -6,4 +6,12 @@ export const columnas = [
     { id: "descartados", nombre: "Descartados", status: 5 },
 ] as const;
 
+export const columnaStatusMap = {
+    nuevos: 1,
+    contactados: 2,
+    calificados: 3,
+    reservados: 4,
+    descartados: 5,
+} as const;
+
 export type ColumnaId = typeof columnas[number]["id"];

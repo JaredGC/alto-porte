@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { getUserData } from "@/app/lib/session";
 import type { Trato, Listas } from "../interfaces";
 import type { ColumnaId } from "../constants";
-import { columnas } from "../constants";
+import { columnas, columnaStatusMap } from "../constants";
 
 const CardRenderer = (card: Trato) => {
     return (
@@ -61,7 +61,7 @@ export default function Treats() {
         descartados: [],
     });
 
-    const getTratos = async (status: number) => {
+    const getLeads = async (status: number) => {
         const userData = await getUserData();
 
         const tratos: Trato[] = await fetch(`http://localhost:3002/api/leads/${status}`, {
@@ -73,7 +73,23 @@ export default function Treats() {
         return tratos;
     }
 
+    const updateLead = async (id: string, status: number) => {
+        const userData = await getUserData();
+
+        console.log({id, status});
+
+        await fetch(`http://localhost:3002/api/leads/${id}`, {
+            method: "PATCH",
+            headers: {
+                "authorization": `Bearer ${userData?.userAccessToken}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ status })
+        });
+    };
+
     const reorder = (list: Trato[], startIndex: number, endIndex: number): Trato[] => {
+        console.log({startIndex, endIndex});
         const result = Array.from(list);
         const [removed] = result.splice(startIndex, 1);
         result.splice(endIndex, 0, removed);
@@ -94,11 +110,11 @@ export default function Treats() {
                 reservados,
                 descartados
             ] = await Promise.all([
-                getTratos(1),
-                getTratos(2),
-                getTratos(3),
-                getTratos(4),
-                getTratos(5),
+                getLeads(1),
+                getLeads(2),
+                getLeads(3),
+                getLeads(4),
+                getLeads(5),
             ]);
 
             setListas({
@@ -134,6 +150,8 @@ export default function Treats() {
             });
 
             return;
+        } else {
+            updateLead(result.draggableId, columnaStatusMap[destinationId]);
         }
 
         const sourceList = listas[sourceId];
@@ -152,6 +170,7 @@ export default function Treats() {
             [sourceId]: sourceList,
             [destinationId]: destinationList
         });
+
     };
 
     return (
