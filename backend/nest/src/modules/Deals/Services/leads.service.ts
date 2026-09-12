@@ -12,7 +12,12 @@ export class LeadsService {
 
   async getLeads(status: number, options: DealListOptions = {}) {
     const leads = await this.leadsRepo.find({
-      where: { status },
+      where: { 
+        status,
+        ...(options.search ? { name: options.search } : {}),
+        ...(options.source ? { source: options.source } : {}),
+        ...(options.project ? { project: options.project } : {}),
+      },
       take: options.limit ? parseInt(options.limit) : undefined,
       skip: options.offset ? parseInt(options.offset) : undefined,
       order: options.sort ? { [options.sort]: options.order === 'desc' ? 'DESC' : 'ASC' } : undefined,
@@ -36,5 +41,22 @@ export class LeadsService {
 
   async deleteLead(id: number) {
     return this.leadsRepo.delete(id);
+  }
+
+  async getLeadFilters() {
+    const sources = await this.leadsRepo
+      .createQueryBuilder('lead')
+      .select('DISTINCT lead.source', 'source')
+      .getRawMany();
+
+    const projects = await this.leadsRepo
+      .createQueryBuilder('lead')
+      .select('DISTINCT lead.project', 'project')
+      .getRawMany();
+
+    return {
+      sources: sources.map(s => s.source),
+      projects: projects.map(p => p.project),
+    };
   }
 }
