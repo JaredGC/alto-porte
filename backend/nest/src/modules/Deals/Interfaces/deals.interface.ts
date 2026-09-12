@@ -5,6 +5,9 @@ export type DealListOptions = {
   sort?: string;
   order?: string;
   condition?: string;
+  search?: string;
+  source?: string;
+  project?: string;
 };
 
 export type CreateLeadDto = {
@@ -17,7 +20,7 @@ export type CreateLeadDto = {
 };
 
 export type UpdateLeadDto = {
-  project: string;
-  agent_id: number;
-  status: number;
+  project?: string;
+  agent_id?: number;
+  status?: number;
 };

@@ -20,14 +20,22 @@ export class LeadsController {
         @Query('agent') agent?: string,
         @Query('sort') sort?: string,
         @Query('order') order?: string,
+        @Query('source') source?: string,
+        @Query('project') project?: string,
     ) {
-        return this.leadsService.getLeads(status, {limit, offset, agent, sort, order});
+        return this.leadsService.getLeads(status, {limit, offset, agent, sort, order, source, project});
     }
 
-    @Get('/leads/:id')
+    @Get('/:id')
     @TokenGuard()
     getLeadById(@Param('id') id: number) {
         return this.leadsService.getLeadById(id);
+    }
+
+    @Post('/filters')
+    @TokenGuard()
+    getLeadFilters() {
+        return this.leadsService.getLeadFilters();
     }
 
     @Post('/')
