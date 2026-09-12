@@ -31,7 +31,7 @@ export const FiltrosRenderer = ({filtros, setFiltros}: {filtros: Filtros, setFil
                         <button
                             key={option.value}
                             onClick={() => setFiltro("source", option.value)}
-                            className={`px-2 py-1 text-xs rounded-full ${option.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                            className={`px-2 cursor-pointer py-1 text-xs rounded-full hover:bg-gray-700 hover:text-white ${option.active ? 'bg-black! text-white!' : 'bg-gray-200 text-black'}`}
                         >
                             {option.value}
                         </button>
@@ -45,7 +45,7 @@ export const FiltrosRenderer = ({filtros, setFiltros}: {filtros: Filtros, setFil
                         <button
                             key={option.value}
                             onClick={() => setFiltro("project", option.value)}
-                            className={`px-2 py-1 text-xs rounded-full ${option.active ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-700'}`}
+                            className={`px-2 py-1 cursor-pointer text-xs rounded-full hover:bg-gray-700 hover:text-white ${option.active ? 'bg-black! text-white!' : 'bg-gray-200 text-black'}`}
                         >
                             {option.value}
                         </button>
