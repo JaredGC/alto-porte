@@ -138,3 +138,4 @@ Voy a comenzar por hacer la actualización de los leads por estados
 
 Ya he terminado la actualización de leads por estados, cuando se arrastra un lead a un cilindro diferente, se actualiza su estado.
 Tambien he añadido un filtro de leads, del origen y proyecto
+Me di cuenta que lo mejor es manejar los filtros en el backend, haciendo un select DISTINCT para que los filtros se actualizen con forme se añadan mas tipos de datos. también refactoricé un poco más el código para que sea mas legíble
