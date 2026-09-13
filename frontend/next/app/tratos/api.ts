@@ -17,13 +17,13 @@ export const getFiltrosOptions = async () => {
 export const getLeads = async (status: number, filtros: Filtros) => {
     const userData = await getUserData();
 
-    const tratos: Lead[] = await fetch(`http://localhost:3002/api/leads/${status}?project=${filtros.project.find(option => option.active)?.value || ''}&source=${filtros.source.find(option => option.active)?.value || ''}`, {
+    const leads: Lead[] = await fetch(`http://localhost:3002/api/leads/${status}?project=${filtros.project.find(option => option.active)?.value || ''}&source=${filtros.source.find(option => option.active)?.value || ''}`, {
         headers: {
             "authorization": `Bearer ${userData?.userAccessToken}`
         }
     }).then(res => res.json());
 
-    return tratos;
+    return leads;
 }
 
 export const updateLead = async (id: string, status: number) => {

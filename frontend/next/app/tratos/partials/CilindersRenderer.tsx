@@ -90,7 +90,7 @@ export const CilindersRenderer = ({ listas, setListas }: { listas: Listas; setLi
                                         </p>
 
                                         <p className="font-light text-(--gray-2) text-xs">
-                                            {cards.length} Tratos
+                                            {cards.length} Leads
                                         </p>
                                     </div>
 

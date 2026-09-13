@@ -1,7 +1,7 @@
 import { ChevronLeft } from "lucide-react";
-import { Trato } from "../interfaces";
+import { Lead } from "../interfaces";
 
-export const CardRenderer = (card: Trato) => {
+export const CardRenderer = (card: Lead) => {
     return (
         <div
             key={card.id}

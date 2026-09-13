@@ -108,7 +108,7 @@ next-frontend:
 			-session.ts
 		-layout.tsx
 		-page.tsx
-		/tratos
+		/leads
 			-page.tsx
 			-layout.tsx
 		/dashboard
@@ -128,7 +128,7 @@ He terminado el backend en nest, pero me he dado cuenta que en el documento dec�
 Quería terminar el frontend hoy, pero apenas he podido terminar una tarea que me dejó la empresa a esta hora
 
 
-Vamos a comenzar la pantalla de tratos utilizando la librería @hello-pangea/dnd que es para manejar una lista draggable.
+Vamos a comenzar la pantalla de leads utilizando la librería @hello-pangea/dnd que es para manejar una lista draggable.
 El frontend traerá los leads del backend.
 Voy a utilizar la librería @hello-pangea/dnd para hacer los cilindros con items desplazables
 He terminado la tabla de leads, aunque me falta refactorizar el código, continuaré mañana.
