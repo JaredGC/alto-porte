@@ -7,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <div className="flex">
-      <Leftbar active="Leads" />
+      <Leftbar active="Tratos" />
       <div className="flex flex-col w-full bg-(--gray-1)">
         <TopBar title="Tratos" />
         {children}
